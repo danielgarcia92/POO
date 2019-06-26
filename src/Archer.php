@@ -1,18 +1,18 @@
 <?php
 
+namespace Game;
+
+use Game\Weapons\Bow;
+
 class Archer extends Unit
 {
-    protected $armor;
-    protected $damage = 20;
-
-    public function attackAction(Unit $enemy)
+    /**
+     * Archer constructor.
+     * @param $name
+     * @param Bow $bow
+     */
+    public function __construct($name, Bow $bow)
     {
-        show(
-            "{$this->getName()} le disparó a {$enemy->getName()} con su arco",
-            'cornflowerblue'
-        );
-
-        $enemy->takeDamage($this->damage);
-
+        parent::__construct($name, $bow);
     }
 }

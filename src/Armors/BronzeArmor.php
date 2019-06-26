@@ -1,5 +1,9 @@
 <?php
 
+namespace Game\Armors;
+
+use Game\Armor;
+
 class BronzeArmor implements Armor
 {
     public function absorbDamage($damage)
@@ -7,4 +11,3 @@ class BronzeArmor implements Armor
         return $damage / 2;
     }
 }
-

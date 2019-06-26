@@ -1,39 +1,15 @@
 <?php
 
+namespace Game;
+
 abstract class Weapon
 {
-    protected $name;
-    protected $type;
-    protected $effectiveness;
+    protected $damage = 0;
 
-    public function __construct($name, $type, $effectiveness)
+    public function getDamage()
     {
-        $this->name = $name;
-        $this->type = $type;
-        $this->effectiveness = $effectiveness;
+        return $this->damage;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getType()
-    {
-        return $this->type;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getEffectiveness()
-    {
-        return $this->effectiveness;
-    }
+    abstract public function getDescription(Unit $attacker, Unit $opponent);
 }

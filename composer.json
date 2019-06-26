@@ -1,0 +1,19 @@
+{
+    "name": "danielgarcia992/poo",
+    "description": "Curso de POO con PHP",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Daniel García",
+            "email": "danielgarcia992@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "files": ["src/helpers.php"],
+        "psr-4": {
+            "Game\\": "src/"
+        }
+    }
+}

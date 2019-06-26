@@ -1,49 +1,68 @@
 <?php
 
-abstract class Unit
-{
+namespace Game;
+
+abstract class Unit {
     protected $name;
     protected $armor;
+    protected $weapon;
     protected $hp = 40;
 
-    abstract public function attackAction(Unit $enemy);
-
-    public function __construct($name)
+    /**
+     * Unit constructor.
+     * @param $name
+     * @param Weapon $weapon
+     */
+    public function __construct($name, Weapon $weapon)
     {
         $this->name = $name;
+        $this->weapon = $weapon;
     }
 
-    /**
-     * @return int
-     */
-    public function getHp()
+    protected function absorbDamage($damage)
+    {
+        if ($this->armor)
+            $damage = $this->armor->absorbDamage($damage);
+
+        return $damage;
+    }
+
+    public function attack(Unit $opponent)
+    {
+        show($this->weapon->getDescription($this, $opponent), 'green');
+
+        $opponent->takeDamage($this->weapon->getDamage());
+    }
+
+    public function die()
+    {
+        show("{$this->name} muere :(");
+        exit();
+    }
+
+    public function getHp(): int
     {
         return $this->hp;
     }
 
-    /**
-     * @return mixed
-     */
     public function getName()
     {
         return $this->name;
     }
 
-    public function moveAction($direction)
+    public function move($direction)
     {
-        show(
-            "{$this->name} avanza hacia $direction"
-        );
+        show("{$this->name} se mueve hacia $direction");
     }
 
-    public function dead()
+    public function setArmor(Armor $armor): void    // Dependency Injection
     {
-        show(
-            "{$this->name} muere",
-            'magenta'
-        );
+        $this->armor = $armor;
+    }
 
-        exit();
+    public function setWeapon(Weapon $weapon): void
+    {
+        $this->weapon = $weapon;
     }
 
     public function takeDamage($damage)
@@ -51,21 +70,9 @@ abstract class Unit
         $this->hp -= $this->absorbDamage($damage);
 
         if ($this->hp <= 0)
-            $this->dead();
+            $this->die();
 
         show("{$this->name} ahora tiene {$this->hp} de HP");
     }
 
-    public function setArmor(Armor $armor = null)   //Dependency Injection DI
-    {
-        $this->armor = $armor;
-    }
-
-    protected function absorbDamage($damage)        //Polymorphism
-    {
-        if ($this->armor)
-            $damage = $this->armor->absorbDamage($damage);
-
-        return $damage;
-    }
 }
