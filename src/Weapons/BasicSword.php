@@ -2,14 +2,11 @@
 
 namespace Game\Weapons;
 
-use Game\Unit;
+use Game\Weapon;
 
-class BasicSword extends Sword
+class BasicSword extends Weapon
 {
     protected $damage = 10;
+    protected $description = ":unit ataca con la espada básica a :opponent";
 
-    public function getDescription(Unit $attacker, Unit $opponent)
-    {
-        return "{$attacker->getName()} ataca con la espada básica a {$opponent->getName()}";
-    }
 }

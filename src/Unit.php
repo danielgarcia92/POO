@@ -2,7 +2,7 @@
 
 namespace Game;
 
-abstract class Unit {
+class Unit {
     protected $name;
     protected $armor;
     protected $weapon;
@@ -19,19 +19,21 @@ abstract class Unit {
         $this->weapon = $weapon;
     }
 
-    protected function absorbDamage($damage)
+    protected function absorbDamage(Attack $attack)
     {
         if ($this->armor)
-            $damage = $this->armor->absorbDamage($damage);
+            return $this->armor->absorbDamage($attack);
 
-        return $damage;
+        return $attack->getDamage();
     }
 
     public function attack(Unit $opponent)
     {
-        show($this->weapon->getDescription($this, $opponent), 'green');
+        $attack = $this->weapon->createAttack();
 
-        $opponent->takeDamage($this->weapon->getDamage());
+        show($attack->getDescription($this, $opponent), 'green');
+
+        $opponent->takeDamage($attack);
     }
 
     public function die()
@@ -65,9 +67,9 @@ abstract class Unit {
         $this->weapon = $weapon;
     }
 
-    public function takeDamage($damage)
+    public function takeDamage(Attack $attack)
     {
-        $this->hp -= $this->absorbDamage($damage);
+        $this->hp -= $this->absorbDamage($attack);
 
         if ($this->hp <= 0)
             $this->die();
