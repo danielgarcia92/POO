@@ -5,7 +5,7 @@ namespace Game\Armors;
 use Game\Armor;
 use Game\Attack;
 
-class CursedArmor implements Armor
+class CursedArmor extends Armor
 {
     public function absorbDamage(Attack $attack)
     {

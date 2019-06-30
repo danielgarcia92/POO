@@ -2,6 +2,8 @@
 
 namespace Game;
 
+use Game\Armors\MissingArmor;
+
 class Unit {
     protected $name;
     protected $armor;
@@ -17,14 +19,7 @@ class Unit {
     {
         $this->name = $name;
         $this->weapon = $weapon;
-    }
-
-    protected function absorbDamage(Attack $attack)
-    {
-        if ($this->armor)
-            return $this->armor->absorbDamage($attack);
-
-        return $attack->getDamage();
+        $this->armor = new MissingArmor();
     }
 
     public function attack(Unit $opponent)
@@ -69,7 +64,7 @@ class Unit {
 
     public function takeDamage(Attack $attack)
     {
-        $this->hp -= $this->absorbDamage($attack);
+        $this->hp -= $this->armor->absorbDamage($attack);
 
         if ($this->hp <= 0)
             $this->die();
