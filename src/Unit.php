@@ -4,8 +4,6 @@ namespace Game;
 
 use Game\Weapons\BasicBow;
 use Game\Weapons\BasicSword;
-use Game\Weapons\LongSword;
-use Game\Armors\BronzeArmor;
 use Game\Armors\MissingArmor;
 
 class Unit {
@@ -30,7 +28,7 @@ class Unit {
     {
         $attack = $this->weapon->createAttack();
 
-        show($attack->getKey($this, $opponent), 'green');
+        Log::info($attack->getKey($this, $opponent));
 
         $opponent->takeDamage($attack);
     }
@@ -47,7 +45,8 @@ class Unit {
 
     public function die()
     {
-        show("{$this->name} muere :(");
+        Log::info("{$this->name} muere :(");
+
         exit();
     }
 
@@ -63,7 +62,7 @@ class Unit {
 
     public function move($direction)
     {
-        show("{$this->name} se mueve hacia $direction");
+        Log::info("{$this->name} se mueve hacia $direction");
     }
 
     public function setArmor(Armor $armor)    // Dependency Injection
@@ -87,7 +86,7 @@ class Unit {
         if ($this->hp <= 0)
             $this->die();
 
-        show(
+        Log::info(
             Translator::get('ReduceHp', [
                 'opponent' => $this->name,
                 'hp' => $this->hp

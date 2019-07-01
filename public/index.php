@@ -4,9 +4,7 @@ namespace Game;
 
 use Game\Armors\BronzeArmor;
 use Game\Armors\SilverArmor;
-use Game\Weapons\BasicBow;
 use Game\Weapons\CrossBow;
-use Game\Weapons\FireBow;
 use Game\Weapons\LongSword;
 
 require '../vendor/autoload.php';
@@ -19,6 +17,8 @@ Translator::set([
     'LongSwordAttack'  => ':unit ataca con la grandiosa espada larga a :opponent',
     'ReduceHp'         => ':opponent has now :hp hp'
 ]);
+
+Log::setLogger(new HtmlLogger());
 
 $archer1 = Unit::createArcher('Tirofijo')
     ->setWeapon(new CrossBow())

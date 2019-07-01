@@ -1,0 +1,8 @@
+Tirofijo ataca con la ballesta a Fo
+Fo has now 25 hp
+Tirofijo ataca con la ballesta a Fo
+Fo has now 10 hp
+Fo ataca con la grandiosa espada larga a Tirofijo
+Tirofijo has now 31.666666666667 hp
+Tirofijo ataca con la ballesta a Fo
+Fo muere :(

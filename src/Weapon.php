@@ -9,7 +9,7 @@ abstract class Weapon
 
     public function createAttack()
     {
-        return new Attack($this->damage, $this->magical, $this->getDescriptionKey());   //Patrón Factory
+        return new Attack($this->damage, $this->magical, $this->getDescriptionKey());   // Factory Method
     }
 
     public function getDescriptionKey()
