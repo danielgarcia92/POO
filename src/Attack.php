@@ -6,19 +6,19 @@ class Attack
 {
     protected $damage;
     protected $magical;
-    protected $description;
+    protected $key;
 
     /**
      * Attack constructor.
      * @param $damage
      * @param $magical
-     * @param $description
+     * @param $key
      */
-    public function __construct($damage, $magical, $description)
+    public function __construct($damage, $magical, $key)
     {
         $this->damage = $damage;
         $this->magical = $magical;
-        $this->description = $description;
+        $this->key = $key;
     }
 
     /**
@@ -50,13 +50,12 @@ class Attack
      * @param Unit $opponent
      * @return mixed
      */
-    public function getDescription(Unit $attacker, Unit $opponent)
+    public function getKey(Unit $attacker, Unit $opponent)
     {
-        return str_replace(
-            [':unit', ':opponent'],
-            [$attacker->getName(), $opponent->getName()],
-            $this->description
-        );
+        return Translator::get($this->key, [
+            'unit' => $attacker->getName(),
+            'opponent' => $opponent->getName()
+        ]);
     }
 
 }

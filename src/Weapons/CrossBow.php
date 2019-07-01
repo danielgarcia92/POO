@@ -8,6 +8,4 @@ use Game\Weapon;
 class CrossBow extends Weapon
 {
     protected $damage = 40;
-    protected $description = ":unit ataca con la ballesta a :opponent";
-
 }

@@ -26,7 +26,7 @@ class Unit {
     {
         $attack = $this->weapon->createAttack();
 
-        show($attack->getDescription($this, $opponent), 'green');
+        show($attack->getKey($this, $opponent), 'green');
 
         $opponent->takeDamage($attack);
     }
@@ -69,7 +69,14 @@ class Unit {
         if ($this->hp <= 0)
             $this->die();
 
-        show("{$this->name} ahora tiene {$this->hp} de HP");
+//        show("{$this->name} ahora tiene {$this->hp} de HP");
+
+        show(
+            Translator::get('ReduceHp', [
+                'opponent' => $this->name,
+                'hp' => $this->hp
+            ])
+        );
     }
 
 }
