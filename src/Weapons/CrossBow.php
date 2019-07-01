@@ -7,5 +7,5 @@ use Game\Weapon;
 
 class CrossBow extends Weapon
 {
-    protected $damage = 40;
+    protected $damage = 30;
 }

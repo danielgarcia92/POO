@@ -2,6 +2,10 @@
 
 namespace Game;
 
+use Game\Armors\BronzeArmor;
+use Game\Armors\SilverArmor;
+use Game\Weapons\BasicBow;
+use Game\Weapons\CrossBow;
 use Game\Weapons\FireBow;
 use Game\Weapons\LongSword;
 
@@ -16,14 +20,17 @@ Translator::set([
     'ReduceHp'         => ':opponent has now :hp hp'
 ]);
 
-$soldier1 =  new Unit( 'Fo', new LongSword());
-$archer1 = new Unit( 'Tirofijo', new FireBow());
+$archer1 = Unit::createArcher('Tirofijo')
+    ->setWeapon(new CrossBow())
+    ->setArmor(new SilverArmor());
+
+$soldier1 = Unit::createSoldier('Fo')
+    ->setWeapon(new LongSword())
+    ->setArmor(new BronzeArmor());
 
 $archer1->attack($soldier1);
-//$soldier1->setArmor(new Armors\BronzeArmor());
 $archer1->attack($soldier1);
-//$archer1->setWeapon(new MachineGun());
-//$archer1->setArmor(new SilverArmor());
+
 $soldier1->attack($archer1);
-$archer1->attack($soldier1);
+
 $archer1->attack($soldier1);

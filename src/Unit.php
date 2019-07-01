@@ -2,6 +2,10 @@
 
 namespace Game;
 
+use Game\Weapons\BasicBow;
+use Game\Weapons\BasicSword;
+use Game\Weapons\LongSword;
+use Game\Armors\BronzeArmor;
 use Game\Armors\MissingArmor;
 
 class Unit {
@@ -31,6 +35,16 @@ class Unit {
         $opponent->takeDamage($attack);
     }
 
+    public static function createArcher($name)  //Factory Method y named constructor
+    {
+        return new Unit($name, new BasicBow());
+    }
+
+    public static function createSoldier($name)
+    {
+        return new Unit($name, new BasicSword());
+    }
+
     public function die()
     {
         show("{$this->name} muere :(");
@@ -52,14 +66,18 @@ class Unit {
         show("{$this->name} se mueve hacia $direction");
     }
 
-    public function setArmor(Armor $armor): void    // Dependency Injection
+    public function setArmor(Armor $armor)    // Dependency Injection
     {
         $this->armor = $armor;
+
+        return $this;
     }
 
-    public function setWeapon(Weapon $weapon): void
+    public function setWeapon(Weapon $weapon)
     {
         $this->weapon = $weapon;
+
+        return $this;
     }
 
     public function takeDamage(Attack $attack)
@@ -68,8 +86,6 @@ class Unit {
 
         if ($this->hp <= 0)
             $this->die();
-
-//        show("{$this->name} ahora tiene {$this->hp} de HP");
 
         show(
             Translator::get('ReduceHp', [
